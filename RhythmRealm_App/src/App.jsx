@@ -1,18 +1,25 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import "./App.css";
+import Sidebar from "./components/Sidebar";
 import Home from "./pages/Home";
 import Trending from "./pages/Trending";
 import Genres from "./pages/Genres";
 import Favorites from "./pages/Favorites";
+import Player from "./components/Player";
 
-const App = () => {
+import { Routes, Route } from "react-router-dom";
+
+function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gradient-to-br from-green-500 to-black text-white">
+    <div
+      style={{
+        display: "flex",
+        minHeight: "100vh",
+        color: "white",
+      }}
+    >
+      <Sidebar />
 
-        <Navbar />
-
+      <div style={{ flex: 1, padding: "20px" }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/trending" element={<Trending />} />
@@ -20,8 +27,10 @@ const App = () => {
           <Route path="/favorites" element={<Favorites />} />
         </Routes>
       </div>
-    </Router>
+
+      <Player />
+    </div>
   );
-};
+}
 
 export default App;

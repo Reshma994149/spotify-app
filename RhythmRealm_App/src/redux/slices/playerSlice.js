@@ -1,33 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  currentSong: null,
+  isPlaying: false,
+};
+
 const playerSlice = createSlice({
   name: "player",
-
-  initialState: {
-    currentSong: null,
-    isPlaying: false,
-    favorites: []
-  },
-
+  initialState,
   reducers: {
-    setSong: (state, action) => {
+    setSong(state, action) {
       state.currentSong = action.payload;
     },
-
-    playPause: (state, action) => {
-      state.isPlaying = action.payload;
+    play(state) {
+      state.isPlaying = true;
     },
-
-    addFavorite: (state, action) => {
-      const exists = state.favorites.find(s => s.id === action.payload.id);
-      if (!exists) state.favorites.push(action.payload);
-    },
-
-    removeFavorite: (state, action) => {
-      state.favorites = state.favorites.filter(s => s.id !== action.payload);
+    pause(state) {
+      state.isPlaying = false;
     },
   },
 });
 
-export const { setSong, playPause, addFavorite, removeFavorite } = playerSlice.actions;
+export const { setSong, play, pause } = playerSlice.actions;
+
 export default playerSlice.reducer;

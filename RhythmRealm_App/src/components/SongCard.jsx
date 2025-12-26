@@ -1,22 +1,45 @@
-import { useDispatch } from "react-redux";
-import { setSong, playPause } from "../redux/slices/playerSlice";
+/* eslint-disable react/prop-types */
 
-export default function SongCard({ song }) {
-  const dispatch = useDispatch();
-
-  const playSong = () => {
-    dispatch(setSong(song));
-    dispatch(playPause(true));
-  };
-
+const SongCard = ({ song, onPlay }) => {
   return (
-    <div className="bg-gray-800 text-white p-4 rounded-lg">
-      <img src={song.img} className="rounded mb-2"/>
-      <h3 className="font-bold">{song.title}</h3>
-      <p>{song.artist}</p>
-      <button onClick={playSong} className="mt-2 bg-green-500 px-3 py-1 rounded">
+    <div
+      style={{
+        background: "rgba(0,0,0,0.3)",
+        padding: "15px",
+        borderRadius: "12px",
+        width: "200px",
+        textAlign: "center",
+        color: "white",
+        backdropFilter: "blur(5px)",
+      }}
+    >
+      <img
+        src={song.image}
+        alt={song.title}
+        style={{
+          width: "150px",
+          height: "150px",
+          borderRadius: "10px",
+          objectFit: "cover",
+        }}
+      />
+
+      <h3>{song.title}</h3>
+      <p style={{ color: "lightgray" }}>{song.artist}</p>
+
+      <button
+        onClick={() => onPlay(song)}
+        style={{
+          padding: "6px 15px",
+          borderRadius: "8px",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
         Play
       </button>
     </div>
   );
-}
+};
+
+export default SongCard;
